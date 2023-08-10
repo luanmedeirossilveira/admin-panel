@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { Header } from '../components/Header'
 import { SuperTable } from '../components/SuperTable'
 import axios from 'axios'
+import { Button, useDisclosure } from '@chakra-ui/react'
+import { Edit } from '../modals/Edit'
 
 export type ProductsType = {
   name: string
@@ -11,6 +13,7 @@ export type ProductsType = {
 }
 
 export const Dashboard = () => {
+  const editModal = useDisclosure()
   const [products, setProducts] = React.useState<ProductsType[] | []>([])
 
   useEffect(() => {
@@ -32,10 +35,10 @@ export const Dashboard = () => {
   return (
     <main>
       <Header />
+      <Button onClick={editModal.onOpen}>Adicionar novo produto</Button>
       <SuperTable
         title="Produtos"
         variant="striped"
-        
         columns={[
           {
             label: 'Nome',
@@ -56,6 +59,7 @@ export const Dashboard = () => {
         ]}
         data={products}
       />
+      <Edit isOpen={editModal.isOpen} onClose={editModal.onClose} />
     </main>
   )
 }
