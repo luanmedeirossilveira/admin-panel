@@ -1,9 +1,9 @@
 import { DataTypes, Model } from 'sequelize'
 import { sequelize } from '../config/database'
 
-export default class Product extends Model {}
+export default class Attributes extends Model {}
 
-Product.init({
+Attributes.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -12,20 +12,11 @@ Product.init({
   name: {
     type: DataTypes.STRING,
   },
-  description: {
+  type: {
     type: DataTypes.STRING
   },
-  price: {
-    type: DataTypes.FLOAT,
-  },
-  category_id: {
-    type: DataTypes.INTEGER
-  },
-  quantity: {
-    type: DataTypes.INTEGER
-  },
-  brand_id: {
-    type: DataTypes.INTEGER
+  values: {
+    type: DataTypes.ARRAY(DataTypes.STRING)
   },
   createdAt: {
     allowNull: false,
@@ -36,6 +27,6 @@ Product.init({
     type: DataTypes.DATE,
   },
 }, {
-  tableName: 'products',
+  tableName: 'attributes',
   sequelize
 })
